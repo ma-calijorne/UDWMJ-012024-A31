@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="style.css"/>
+<html>
+    <head>
+        <title>Trabalho A3.1 - Perfil do Aluno</title>
+    </head>
+
+    <script>
+        function mudarImagem(novaImagem) {
+            document.getElementById('imagemPerfil').src = novaImagem;
+        }
+        function adicionarUC() {
+            // Pedindo ao usuùrio para inserir o nome da nova UC
+            var novaUC = prompt("Por favor, insira o nome da nova UC:");
+            
+            // Verificando se o usuùrio inseriu algo
+            if (novaUC) {
+                // Encontrando a tabela pelo seu ID
+                var tabela = document.getElementById("ucsCursadas");
+                
+                // Criando uma nova linha e cùlula para a tabela
+                var novaLinha = tabela.insertRow();
+                var novaCelula = novaLinha.insertCell();
+                
+                // Adicionando a classe ù nova linha e cùlula, se necessùrio
+                novaLinha.className = "tr-simple";
+                novaCelula.className = "td-simple";
+                
+                // Definindo o texto da nova cùlula para o valor inserido pelo usuùrio
+                novaCelula.textContent = novaUC;
+            }
+        }
+
+        function moverCima() {
+        var tabela = document.getElementById("ucsCursadas").getElementsByTagName('tbody')[0];
+        var linhas = tabela.rows;
+        for (var i = 1; i < linhas.length; i++) {
+            if (linhas[i].getElementsByTagName("input")[0].checked) {
+                if (i > 0) {
+                    tabela.insertBefore(linhas[i], linhas[i - 1]);
+                    break;
+                }
+            }
+        }
+    }
+
+    function moverBaixo() {
+        var tabela = document.getElementById("ucsCursadas").getElementsByTagName('tbody')[0];
+        var linhas = tabela.rows;
+        for (var i = 0; i < linhas.length - 1; i++) {
+            if (linhas[i].getElementsByTagName("input")[0].checked) {
+                if (i < linhas.length - 1) {
+                    tabela.insertBefore(linhas[i + 1], linhas[i]);
+                    break;
+                }
+            }
+        }
+    }
+
+    function validarCPF(cpf) {
+        // Limpa o CPF de pontos e traùos
+        cpf = cpf.replace(/[.-]/g, '');
+
+        // Verifica se o CPF possui 11 dùgitos apùs a limpeza
+        if (cpf.length !== 11) {
+            document.getElementById('mensagemErro').textContent = 'CPF invùlido. Deve conter 11 dùgitos.';
+            return;
+        }
+
+        let soma = 0;
+        let resto;
+
+        // Validaùùo do primeiro dùgito verificador
+        for (let i = 1; i <= 9; i++) 
+            soma = soma + parseInt(cpf.substring(i-1, i)) * (11 - i);
+        resto = (soma * 10) % 11;
+
+        if ((resto == 10) || (resto == 11))  resto = 0;
+        if (resto != parseInt(cpf.substring(9, 10)) ) {
+            document.getElementById('mensagemErro').textContent = 'CPF invùlido.';
+            return;
+        }
+        
+        soma = 0;
+        for (let i = 1; i <= 10; i++) 
+            soma = soma + parseInt(cpf.substring(i-1, i)) * (12 - i);
+        resto = (soma * 10) % 11;
+        
+        if ((resto == 10) || (resto == 11))  resto = 0;
+        if (resto != parseInt(cpf.substring(10, 11) ) ) {
+            document.getElementById('mensagemErro').textContent = 'CPF invùlido.';
+            return;
+        }
+
+        // Se passar por todas as validaùùes, limpa a mensagem de erro
+        document.getElementById('mensagemErro').textContent = '';
+    }
+
+    function validarEmail(email) {
+        const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+        if (!regex.test(email)) {
+            document.getElementById('mensagemErroEmail').textContent = 'E-mail invùlido.';
+        } else {
+            document.getElementById('mensagemErroEmail').textContent = '';
+        }
+    }
+    </script>
+
+    <body>
+
+        <table id="perfilGeral" width="100%">
+            <tr class="tr-center-head">
+                <td colspan="2" class="td-center-head">MEU PERFIL PESSOAL</td>
+            </tr>
+            <tr class="tr-center">
+                <td class="td-center">Dados Pessoais</td>
+            </tr>
+            <tr>
+                <td>
+                    <table id="dadosPessoais" width="100%">
+                        <tr>
+                            <td width="25%" class="td-simple-title">Nome:</td>
+                            <td width="50%">Cebolùcio Menezes da Silva Jùnior</td>
+                            <td width="25%" align="center" rowspan="3">
+                                <img class="img-perfil" id="imagemPerfil" src="Foto1.jpg"><br>
+                                <a href="#" onclick="mudarImagem('Foto1.jpg')"><img width="10%" src="mudaImg.png"></a>
+                                <a href="#" onclick="mudarImagem('Foto2.jpg')"><img width="10%" src="mudaImg.png"></a>
+                        <a href="#" onclick="mudarImagem('Foto3.jpg')"><img width="10%" src="mudaImg.png"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="25%" class="td-simple-title">Endereùo:</td>
+                            <td width="50%">Rua do Limùo, 13, Limoeiro, Sùo Paulo, Sùo Paulo</td>
+                        </tr>
+                        <tr>
+                            <td width="25%" class="td-simple-title">RA:</td>
+                            <td width="50%">123265441283</td>
+                        </tr>
+                        <tr>
+                            <td width="25%" class="td-simple-title">CPF:</td>
+                            <td width="50%"><input type="text" id="cpf" placeholder="Digite seu CPF" onblur="validarCPF(this.value)">
+                                <div id="mensagemErro" style="color: red;"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="25%" class="td-simple-title">E-mail:</td>
+                            <td width="50%"> <input type="text" id="email" placeholder="Digite seu e-mail" onblur="validarEmail(this.value)">
+                                <div id="mensagemErroEmail" style="color: red;"></div>
+                            </td>
+                           
+
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="tr-center">
+                <td class="td-center">Informaùùes Acadùmicas</td>
+            </tr>
+            <tr>
+                <td>
+                    <table id="informacoesAcademicas" width="100%" class="table-simple-title">
+                        <tr>
+                            <td width="25%" class="td-simple-title">Curso:</td>
+                            <td width="75%">Ciùncia da Computaùùo</td>
+                        </tr>
+                        <tr>
+                            <td width="25%" class="td-simple-title">Perùodo Atual:</td>
+                            <td width="75%">2 Perùodo</td>
+                        </tr>
+                        <tr>
+                            <td class="td-simple-title">UCs Cursadas:</td>
+                            <td>
+                                <table id="ucsCursadas" width="100%" class="table-simple">
+                                    <tbody>
+                                        <tr class="tr-simple">
+                                            <td class="td-simple"><input type="checkbox"></td>
+                                            <td class="td-simple">Usabilidade, Desenvolvimento Web, Mobile e Jogos</td>
+                                            <td><button onclick="moverCima()">? Mover para Cima</button></td>
+                                        </tr>
+                                        <tr class="tr-simple">
+                                            <td class="td-simple"><input type="checkbox"></td>
+                                            <td class="td-simple">Teoria da Computaùùo e Compiladores</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr class="tr-simple">
+                                            <td class="td-simple"><input type="checkbox"></td>
+                                            <td class="td-simple">Estruturas de Dados e Anùlise de Algoritmoss</td>
+                                        </tr>
+                                    </tbody>
+                                </table>    
+                                <button onclick="adicionarUC()">Adicionar Nova UC</button>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="tr-center">
+                <td class="td-center">Perfil Pessoal</td>
+            </tr>
+            <tr>
+                <td>Meu nome ù Cebolùcio Jùnior Menezes da Silva, mas sou mais conhecido como Cebolinha ou Cebola, 
+                    e sou um dos personagens mais cùlebres e engraùados de Mauricio de Sousa, e um dos protagonistas 
+                    da sùrie de quadrinhos nacional Turma da Mùnica. Minhas caracterùsticas marcantes sùo, a dislalia 
+                    (trocando a letra "R" pelo "L"), e ter apenas cinco fios de cabelo espetados na cabeùa. 
+                    Eu sou mestre em criar diversos planos infalùveis para derrotar a Mùnica, outra personagem 
+                    principal e minha conhecidùssima rival, para pegar o posto de dono da Rua do Limùo e seu coelhinho, 
+                    Sansùo (para dar uns deliciosos nùs nas orelhas do bichinho de pelùcia). Originalmente, eu era o 
+                    personagem principal de Mauricio, atù que perdi o tùtulo para a dentucinha, por isso quero derrotù-la 
+                    constantemente. Alùm dos planos infaliveis (que por algum motivo nunca dùo certo) adoro jogar 
+                    futebol com meus amigos</td>
+            </tr>
+            <tr class="tr-center">
+                <td class="td-center">Perfil Profissional/Acadùmico</td>
+            </tr>
+            <tr>
+                <td>Sempre fui apaixonado por tecnologia e resolver enigmas complexos, o que me levou a escolher 
+                    Ciùncia da Computaùùo como minha ùrea de estudo. Agora, entrando no terceiro perùodo, estou mais 
+                    empolgado do que nunca, pois acabei de comeùar um estùgio incrùvel na TI dos Estùdios Mauricio de Sousa, 
+                    um lugar que sempre admirei desde crianùa. Aqui, estou tendo a oportunidade de aplicar tudo o que 
+                    aprendi em sala de aula em projetos reais, alùm de estar cercado por personagens que fizeram parte da 
+                    minha infùncia. Estou me dedicando a aprender mais sobre desenvolvimento de software, seguranùa da 
+                    informaùùo e, claro, como melhorar minha habilidade de comunicaùùo, apesar da minha famosa dificuldade 
+                    em pronunciar o "r". Estou ansioso para contribuir com minha equipe e crescer profissionalmente neste 
+                    ambiente criativo e inspirador.</td>
+            </tr>
+            <tr class="tr-center">
+                <td class="td-center">Links Importantes</td>
+            </tr>
+            <tr>
+                <td>
+                    <table id="linksImportantes" width="100%" class="table-simple">
+                        <tr class="tr-simple">
+                            <td class="td-simple">
+                               <a href="https://turmadamonica.fandom.com/pt-br/wiki/Cebolinha">Clique Aqui para Me Conhecer Melhor</a>
+                            </td>
+                        </tr>
+                        <tr class="tr-simple">
+                            <td class="td-simple">
+                                <a href="https://turmadamonica.uol.com.br/" target="_blank">Clique Aqui para Conhecer mais a Minha Turma</a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>    
+    </body>
+
+</html>

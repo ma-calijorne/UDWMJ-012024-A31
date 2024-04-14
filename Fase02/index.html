@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="style.css"/>
+<html>
+    <head>
+        <title>Trabalho A3.1 - Perfil do Aluno</title>
+    </head>
+
+    <script>
+        function mudarImagem(novaImagem) {
+            document.getElementById('imagemPerfil').src = novaImagem;
+        }
+    </script>
+
+    <body>
+
+        <table id="perfilGeral" width="100%">
+            <tr class="tr-center-head">
+                <td colspan="2" class="td-center-head">MEU PERFIL PESSOAL</td>
+            </tr>
+            <tr class="tr-center">
+                <td class="td-center">Dados Pessoais</td>
+            </tr>
+            <tr>
+                <td>
+                    <table id="dadosPessoais" width="100%">
+                        <tr>
+                            <td width="25%" class="td-simple-title">Nome:</td>
+                            <td width="50%">Cebolácio Menezes da Silva Júnior</td>
+                            <td width="25%" align="center" rowspan="3">
+                                <img class="img-perfil" id="imagemPerfil" src="Foto1.jpg"><br>
+                                <a href="#" onclick="mudarImagem('Foto1.jpg')"><img width="10%" src="mudaImg.png"></a>
+                                <a href="#" onclick="mudarImagem('Foto2.jpg')"><img width="10%" src="mudaImg.png"></a>
+                                <a href="#" onclick="mudarImagem('Foto3.jpg')"><img width="10%" src="mudaImg.png"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="25%" class="td-simple-title">Endereço:</td>
+                            <td width="50%">Rua do Limão, 13, Limoeiro, São Paulo, São Paulo</td>
+                        </tr>
+                        <tr>
+                            <td width="25%" class="td-simple-title">RA:</td>
+                            <td width="50%">123265441283</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="tr-center">
+                <td class="td-center">Informações Acadêmicas</td>
+            </tr>
+            <tr>
+                <td>
+                    <table id="informacoesAcademicas" width="100%" class="table-simple-title">
+                        <tr>
+                            <td width="25%" class="td-simple-title">Curso:</td>
+                            <td width="75%">Ciência da Computação</td>
+                        </tr>
+                        <tr>
+                            <td width="25%" class="td-simple-title">Período Atual:</td>
+                            <td width="75%">2 Período</td>
+                        </tr>
+                        <tr>
+                            <td class="td-simple-title">UCs Cursadas:</td>
+                            <td>
+                                <table id="ucsCursadas" width="100%" class="table-simple">
+                                    <tr class="tr-simple"><td class="td-simple">Usabilidade, Desenvolvimento Web, Mobile e Jogos</td></tr>
+                                    <tr class="tr-simple"><td class="td-simple">Teoria da Computação e Compiladores</td></tr>
+                                    <tr class="tr-simple"><td class="td-simple">Estruturas de Dados e Análise de Algoritmoss</td></tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="tr-center">
+                <td class="td-center">Perfil Pessoal</td>
+            </tr>
+            <tr>
+                <td>Meu nome é Cebolácio Júnior Menezes da Silva, mas sou mais conhecido como Cebolinha ou Cebola, 
+                    e sou um dos personagens mais célebres e engraçados de Mauricio de Sousa, e um dos protagonistas 
+                    da série de quadrinhos nacional Turma da Mônica. Minhas características marcantes são, a dislalia 
+                    (trocando a letra "R" pelo "L"), e ter apenas cinco fios de cabelo espetados na cabeça. 
+                    Eu sou mestre em criar diversos planos infalíveis para derrotar a Mônica, outra personagem 
+                    principal e minha conhecidíssima rival, para pegar o posto de dono da Rua do Limão e seu coelhinho, 
+                    Sansão (para dar uns deliciosos nós nas orelhas do bichinho de pelúcia). Originalmente, eu era o 
+                    personagem principal de Mauricio, até que perdi o título para a dentucinha, por isso quero derrotá-la 
+                    constantemente. Além dos planos infaliveis (que por algum motivo nunca dão certo) adoro jogar 
+                    futebol com meus amigos</td>
+            </tr>
+            <tr class="tr-center">
+                <td class="td-center">Perfil Profissional/Acadêmico</td>
+            </tr>
+            <tr>
+                <td>Sempre fui apaixonado por tecnologia e resolver enigmas complexos, o que me levou a escolher 
+                    Ciência da Computação como minha área de estudo. Agora, entrando no terceiro período, estou mais 
+                    empolgado do que nunca, pois acabei de começar um estágio incrível na TI dos Estúdios Mauricio de Sousa, 
+                    um lugar que sempre admirei desde criança. Aqui, estou tendo a oportunidade de aplicar tudo o que 
+                    aprendi em sala de aula em projetos reais, além de estar cercado por personagens que fizeram parte da 
+                    minha infância. Estou me dedicando a aprender mais sobre desenvolvimento de software, segurança da 
+                    informação e, claro, como melhorar minha habilidade de comunicação, apesar da minha famosa dificuldade 
+                    em pronunciar o "r". Estou ansioso para contribuir com minha equipe e crescer profissionalmente neste 
+                    ambiente criativo e inspirador.</td>
+            </tr>
+            <tr class="tr-center">
+                <td class="td-center">Links Importantes</td>
+            </tr>
+            <tr>
+                <td>
+                    <table id="linksImportantes" width="100%" class="table-simple">
+                        <tr class="tr-simple">
+                            <td class="td-simple">
+                               <a href="https://turmadamonica.fandom.com/pt-br/wiki/Cebolinha">Clique Aqui para Me Conhecer Melhor</a>
+                            </td>
+                        </tr>
+                        <tr class="tr-simple">
+                            <td class="td-simple">
+                                <a href="https://turmadamonica.uol.com.br/" target="_blank">Clique Aqui para Conhecer mais a Minha Turma</a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>    
+    </body>
+
+</html>
